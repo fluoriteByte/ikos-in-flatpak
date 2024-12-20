@@ -7,6 +7,7 @@ add-extensions:
     version: '24.08'
 finish-args:
 - --filesystem=home:ro
+- --env=
 command: ikos
 
 modules:
@@ -37,9 +38,9 @@ modules:
     buildsystem: cmake
     builddir: true
     config-opts:
-    - -DCMAKE_INSTALL_PREFIX=/app/ikos
     - -DTBB_ROOT=/app
     - -DLLVM_ROOT=/usr/lib/sdk/llvm14
+    - -DBUILD_SHARED_LIBS=ON
     build-options:
       append-path: "/app/lib/llvm14/bin"
       prepend-ld-library-path: "/app/lib/llvm14/lib"
@@ -47,9 +48,4 @@ modules:
     - type: git
       url: https://github.com/NASA-SW-VnV/ikos
       commit: 026c409e4ecbc068eaf69f52e6dd230f9e515bcc
-  - name: link-ikos-to-/app/bin
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/bin
-      - ln -s /ikos/bin/* /app/bin
 
