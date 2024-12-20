@@ -1,3 +1,3 @@
-[submodule "org.freedesktop.Sdk.Extension.llvm14"]
-	path = org.freedesktop.Sdk.Extension.llvm14
+[submodule "llvm14ext-fork"]
+	path = llvm14ext-fork
 	url = https://github.com/fluoriteByte/org.freedesktop.Sdk.Extension.llvm14.git
