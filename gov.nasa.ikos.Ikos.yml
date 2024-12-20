@@ -47,7 +47,7 @@ modules:
     - type: git
       url: https://github.com/NASA-SW-VnV/ikos
       commit: 026c409e4ecbc068eaf69f52e6dd230f9e515bcc
-  - name: link ikos to /app/bin
+  - name: link-ikos-to-/app/bin
     buildsystem: simple
     build-commands:
       - mkdir -p /app/bin
