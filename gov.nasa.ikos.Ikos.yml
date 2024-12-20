@@ -1,0 +1,49 @@
+app-id: org.nasa.ikos.Ikos
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+add-extensions:
+  org.freedesktop.Sdk.Extension.llvm14:
+    version: '22.08'
+finish-args:
+- --filesystem=home:ro
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=headers
+      - ./b2 install variant=release link=shared runtime-link=shared
+        --with-filesystem --with-thread --with-test --with-system
+        cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS
+    sources:
+      - type: archive
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.86.0/source/boost_1_86_0.tar.gz
+        sha256: 2575e74ffc3ef1cd0babac2c1ee8bdb5782a0ee672b1912da40e5b4b591ca01f
+  - name: tbb
+    buildsystem: cmake
+    sources:
+    - type: git
+      url: https://github.com/uxlfoundation/oneTBB
+      commit: 0c0ff192a2304e114bc9e6557582dfba101360ff
+  - name: movellvmintoappbin
+    buildsystem: simple
+    build-commands:
+      - cp -r /usr/lib/sdk/llvm14/ /app/lib/llvm14
+      - ldconfig /app/lib/llvm14/lib
+
+  - name: Ikos
+    buildsystem: cmake
+    builddir: true
+    config-opts:
+    - -DCMAKE_INSTALL_PREFIX=/app/ikos
+    - -DTBB_ROOT=/app
+#    - -DLLVM_ROOT=/app/lib/llvm14
+    build-options:
+      append-path: "/app/lib/llvm14/bin"
+      prepend-ld-library-path: "/app/lib/llvm14/lib"
+    sources:
+    - type: git
+      url: https://github.com/NASA-SW-VnV/ikos
+      commit: 026c409e4ecbc068eaf69f52e6dd230f9e515bcc
+

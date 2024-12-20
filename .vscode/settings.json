@@ -1,0 +1,12 @@
+{
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        ".flatpak/**": true,
+        "_build/**": true
+    },
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/flatpak/flatpak-builder/master/data/flatpak-manifest.schema.json": "file:///home/illy/Documents/CompileStuff/ikos%20in%20flatpak/gov.nasa.ikos.Ikos.yml"
+    }
+}
