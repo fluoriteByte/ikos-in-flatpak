@@ -7,6 +7,7 @@ add-extensions:
     version: '24.08'
 finish-args:
 - --filesystem=home:ro
+command: ikos
 
 modules:
   - name: boost
