@@ -40,7 +40,6 @@ modules:
     config-opts:
     - -DTBB_ROOT=/app
     - -DLLVM_ROOT=/usr/lib/sdk/llvm14
-    - -DBUILD_SHARED_LIBS=ON
     build-options:
       append-path: "/app/lib/llvm14/bin"
       prepend-ld-library-path: "/app/lib/llvm14/lib"
